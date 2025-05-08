@@ -1,0 +1,45 @@
+source "https://rubygems.org"
+
+ruby "3.2.2"
+
+# Core Rails gems
+gem "rails", "~> 7.1.0"
+gem "sprockets-rails"
+gem "puma", ">= 5.0"
+gem "importmap-rails"
+gem "turbo-rails"
+gem "stimulus-rails"
+gem "jbuilder"
+gem "bootsnap", require: false
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+
+# Production gems
+gem "pg"
+
+# API and Authentication
+gem 'devise'
+gem 'rack-cors'
+gem 'jwt'
+gem 'twilio-ruby'
+
+# Background Jobs
+gem 'resque', '~> 2.7.0'
+gem 'redis', '~> 5.0.0'
+
+# Development and test gems
+group :development, :test do
+  gem "sqlite3", "~> 1.4"
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+end
+
+group :development do
+  gem "web-console"
+  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+end
+
+group :test do
+  gem "capybara"
+  gem "selenium-webdriver"
+end
