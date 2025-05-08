@@ -1,0 +1,82 @@
+<div class="auth-page d-flex align-items-center">
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-5">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h2 class="h4 text-center mb-4">Please sign {{ isLogin ? 'in' : 'up' }}</h2>
+
+            <form [formGroup]="authForm" (ngSubmit)="onSubmit()" novalidate>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  class="form-control"
+                  placeholder="Enter your email"
+                  [ngClass]="{ 'is-invalid': emailControl?.invalid && emailControl?.touched }"
+                />
+                <div class="invalid-feedback" *ngIf="emailControl?.invalid && emailControl?.touched">
+                  Please enter a valid email address
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  formControlName="password"
+                  class="form-control"
+                  placeholder="Enter your password"
+                  [ngClass]="{ 'is-invalid': passwordControl?.invalid && passwordControl?.touched }"
+                />
+                <div class="invalid-feedback" *ngIf="passwordControl?.invalid && passwordControl?.touched">
+                  Password is required
+                </div>
+              </div>
+
+              <div class="mb-3" *ngIf="!isLogin">
+                <label for="passwordConfirmation" class="form-label">Confirm Password</label>
+                <input
+                  type="password"
+                  id="passwordConfirmation"
+                  formControlName="passwordConfirmation"
+                  class="form-control"
+                  placeholder="Confirm your password"
+                  [ngClass]="{ 'is-invalid': passwordConfirmationControl?.touched && (passwordConfirmationControl?.invalid || authForm.hasError('passwordMismatch')) }"
+                />
+                <div class="invalid-feedback" *ngIf="passwordConfirmationControl?.touched && authForm.hasError('passwordMismatch')">
+                  Passwords must match
+                </div>
+                <div class="invalid-feedback" *ngIf="passwordConfirmationControl?.touched && passwordConfirmationControl?.errors?.['required']">
+                  Password confirmation is required
+                </div>
+              </div>
+
+              <div class="alert alert-danger" role="alert" *ngIf="authError">
+                {{ authError }}
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                [disabled]="authForm.invalid || isLoading"
+              >
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Sign {{ isLogin ? 'In' : 'Up' }}
+              </button>
+
+              <div class="text-center mt-3">
+                <a href="#" (click)="toggleAuthMode($event)" class="small">
+                  Sign {{ isLogin ? 'Up' : 'In' }}
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

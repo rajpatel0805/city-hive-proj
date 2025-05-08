@@ -1,0 +1,7 @@
+{
+  "/resque": {
+    "target": "https://city-hive-proj-production.up.railway.app",
+    "secure": true,
+    "changeOrigin": true
+  }
+} 
