@@ -1,0 +1,52 @@
+<div class="container">
+    <h1>MY SMS MESSENGER</h1>
+  
+    <div class="grid">
+      <!-- New Message Form -->
+      <div class="form">
+        <h2>New Message</h2>
+        <label>Phone Number</label>
+        <div class="input-group">
+          <input 
+            type="text" 
+            [(ngModel)]="newMessage.phone" 
+            (input)="onPhoneInput($event)"
+            [class.error]="!isPhoneValid && newMessage.phone.length > 0"
+            maxlength="10"
+            placeholder="Enter 10-digit phone number"
+          />
+          <div class="error-message" *ngIf="!isPhoneValid && newMessage.phone.length > 0">
+            Please enter a valid 10-digit phone number
+          </div>
+        </div>
+  
+        <label>Message</label>
+        <textarea [(ngModel)]="newMessage.text" maxlength="250"></textarea>
+        <small>{{ getMessageStatus() }} {{ getCharacterCount() }}/250</small>
+  
+        <div class="actions">
+          <button type="button" (click)="clearMessage()">Clear</button>
+          <button 
+            type="button" 
+            (click)="sendMessage()" 
+            [disabled]="!isPhoneValid || !newMessage.text || newMessage.phone.length !== 10"
+          >Submit</button>
+        </div>
+      </div>
+  
+      <!-- Message History -->
+      <div class="history">
+        <h2>Message History ({{ messages.length }})</h2>
+  
+        <div *ngFor="let msg of messages" class="message-box">
+          <div class="meta">
+            <strong>{{ (msg.phone_number) }}</strong>
+            <span>{{ msg.created_at | date:'EEEE, MMMM d, y \'at\' h:mm:ss a z' }}</span>
+          </div>
+          <div class="text">{{ msg.body }}</div>
+          <small>Status: {{ msg.status }} • {{ msg.body.length || 0 }}/250</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  

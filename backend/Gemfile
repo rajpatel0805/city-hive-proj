@@ -1,0 +1,43 @@
+source "https://rubygems.org"
+ruby "3.2.2"
+
+gem "rails", "~> 7.1.5"
+# Bootsnap speeds up boot by caching expensive operations
+gem "bootsnap", ">= 1.16.0", require: false
+
+gem 'rack-cors'
+gem "sprockets-rails", "~> 3.4"
+
+gem "resque", "~> 2.0"
+gem 'redis'
+gem 'puma'
+gem 'twilio-ruby'
+
+# — ORM adapters —
+# (uncomment any of these if you need to keep SQL around)
+# gem "sqlite3", "~> 1.4"
+# gem "pg", ">= 0.18", "< 2.0"
+# gem "mysql2", ">= 0.5"
+
+# switch to MongoDB
+gem "mongoid", "~> 8.0"
+
+# Authentication
+gem "devise"
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "shoulda-matchers", "~> 5.0"
+  gem "mongoid-rspec", "~> 4.1"
+  gem "faker"
+  # …any other dev/test gems
+end
+
+group :production do
+  # production-only gems
+end
+
+group :test do
+  gem 'mocha'
+end
