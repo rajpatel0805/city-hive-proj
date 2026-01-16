@@ -15,7 +15,7 @@ class Message
   validates :to_phone_number, presence: true
   validates :user_id, presence: true
 
-  TWILIO_PHONE_NUMBER = '+18446435371'
+  TWILIO_PHONE_NUMBER = '+12293039759'
 
   def send_message_to_twilio!
     begin
