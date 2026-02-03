@@ -92,4 +92,12 @@ export class SmsMessengerComponent implements OnInit {
   clearMessage(): void {
     this.messageForm.reset();
   }
+
+  deleteMessage(message: Message): void {
+    this.messageService.deleteMessage(message).subscribe({
+      next: (data) => {
+        this.loadMessages();
+      }
+    });
+  }
 }

@@ -52,6 +52,7 @@
   
         <div *ngFor="let msg of messages" class="message-box">
           <div class="meta">
+            <button (click)="deleteMessage(msg)">Delete</button>
             <strong>{{ formatDisplayPhoneNumber(msg.phone_number) }}</strong>
             <span>{{ msg.created_at | date:'EEEE, MMMM d, y \'at\' h:mm:ss a z' }}</span>
           </div>

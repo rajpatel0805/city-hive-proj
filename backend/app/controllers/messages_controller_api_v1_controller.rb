@@ -27,7 +27,7 @@ class MessagesControllerApiV1Controller < ApplicationController
   end
 
   def index
-    messages = current_user.messages
+    messages = current_user.messages.where(hidden: nil)
     render json: messages.map { |message|
       {
         id: message.id,
@@ -38,6 +38,15 @@ class MessagesControllerApiV1Controller < ApplicationController
         user_id: message.user_id,
         status: message.status
       }
+    }
+  end
+
+  def destroy
+    message = current_user.messages.find(params[:id])
+    message.update!(hidden: true)
+
+    render json: {
+      message: message
     }
   end
 

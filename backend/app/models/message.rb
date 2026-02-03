@@ -8,6 +8,7 @@ class Message
   field :status, type: String
   field :message_sid, type: String
   field :error_message, type: String
+  field :hidden, type: Boolean
 
   belongs_to :user, class_name: 'User', inverse_of: :messages
 

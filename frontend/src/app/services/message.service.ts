@@ -59,6 +59,16 @@ export class MessageService {
     );
   }
 
+  deleteMessage(message: Message): Observable<Message> {
+    console.warn(this.apiUrl + "/" + message.id)
+    return this.http.delete<Message>(this.apiUrl + "/" + message.id, {
+      headers: this.getAuthHeaders(),
+      withCredentials: true
+    }).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   fetchMessages(): Observable<Message[]> {
     try {
       return this.http.get<Message[]>(this.apiUrl, {

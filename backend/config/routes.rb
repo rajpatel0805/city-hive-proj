@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       }
 
     get 'health', to: 'health_controller_api_v1#index'
-    resources :messages, controller: 'messages_controller_api_v1', only: [:create, :index]
+    resources :messages, controller: 'messages_controller_api_v1', only: [:create, :index, :destroy]
     post 'messages/process_status_callback', to: 'messages_controller_api_v1#process_status_callback'
   end
 
